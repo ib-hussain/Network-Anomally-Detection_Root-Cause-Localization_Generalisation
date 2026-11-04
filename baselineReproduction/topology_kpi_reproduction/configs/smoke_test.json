@@ -1,0 +1,6 @@
+{
+  "data": {"window_length": 10, "stride": 2, "split": [0.60, 0.15, 0.25]},
+  "model": {"hidden_dim": 16, "temporal_layers": 1, "graph_layers": 1, "attention_heads": 4, "feedforward_dim": 32, "dropout": 0.0, "topology_input_strength": 0.2, "mask_ratio": 0.15, "lambda_rec": 1.0, "lambda_pred": 1.0, "lambda_topology": 0.10, "alpha": 0.50, "top_m": 3},
+  "rca": {"candidate_cap": 5, "propagation_depth": 3, "decay": 0.70, "gamma": 0.60},
+  "training": {"learning_rate": 0.001, "batch_size": 32, "max_epochs": 2, "patience": 2, "gradient_clip": 5.0}
+}

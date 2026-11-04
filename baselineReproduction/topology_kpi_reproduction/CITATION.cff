@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated manuscript."
+type: software
+title: "Topology-Aware Self-Supervised Multivariate KPI Anomaly Detection and Root Cause Node Localization for Network Operations"
+version: "1.0.0"
+doi: "10.5281/zenodo.21978138"
+authors:
+  - family-names: Luo
+    given-names: Debiao
+  - family-names: Wang
+    given-names: Weijie
+    email: wangweijie@cdu.edu.cn
+  - family-names: Liu
+    given-names: Xinyue
+  - family-names: Yang
+    given-names: Wen
+  - family-names: Hu
+    given-names: Ke
+  - family-names: Zhang
+    given-names: Jia
+preferred-citation:
+  type: article
+  title: "Topology-Aware Self-Supervised Multivariate KPI Anomaly Detection and Root Cause Node Localization for Network Operations"
+  authors:
+    - family-names: Luo
+      given-names: Debiao
+    - family-names: Wang
+      given-names: Weijie
+    - family-names: Liu
+      given-names: Xinyue
+    - family-names: Yang
+      given-names: Wen
+    - family-names: Hu
+      given-names: Ke
+    - family-names: Zhang
+      given-names: Jia
+  journal: "Scientific Reports"

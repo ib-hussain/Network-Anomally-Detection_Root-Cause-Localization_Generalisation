@@ -1,0 +1,20 @@
+{
+  "seeds": [17, 29, 43, 71, 101],
+  "scales": [
+    {
+      "nodes": 12,
+      "data": "../data/mininet_12.npz",
+      "abnormal_pool": "../data/mininet_12_abnormal_pool.npz"
+    },
+    {
+      "nodes": 24,
+      "data": "../data/mininet_24.npz",
+      "abnormal_pool": "../data/mininet_24_abnormal_pool.npz"
+    },
+    {
+      "nodes": 48,
+      "data": "../data/mininet_48.npz",
+      "abnormal_pool": "../data/mininet_48_abnormal_pool.npz"
+    }
+  ]
+}

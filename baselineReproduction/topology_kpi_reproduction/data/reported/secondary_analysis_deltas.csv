@@ -1,0 +1,23 @@
+analysis,setting,delta_f1,delta_auroc,delta_a1,delta_a3
+ablation,w/o Topology,-0.016,-0.013,-0.070,-0.055
+ablation,w/o Prediction,-0.012,-0.008,-0.023,-0.015
+ablation,Static undirected propagation,0.000,0.000,-0.016,-0.011
+ablation,w/o Propagation,0.000,0.000,-0.048,-0.031
+ablation,Selected reference configuration,0.000,0.000,0.000,0.000
+rca_weight,"gamma=0.0, eta=1.0",,,-0.033,-0.022
+rca_weight,"gamma=0.1, eta=0.9",,,-0.026,-0.018
+rca_weight,"gamma=0.2, eta=0.8",,,-0.018,-0.013
+rca_weight,"gamma=0.3, eta=0.7",,,-0.011,-0.008
+rca_weight,"gamma=0.4, eta=0.6",,,-0.005,-0.004
+rca_weight,"gamma=0.5, eta=0.5",,,-0.002,-0.001
+rca_weight,"gamma=0.6, eta=0.4",,,0.000,0.000
+rca_weight,"gamma=0.7, eta=0.3",,,-0.003,-0.003
+rca_weight,"gamma=0.8, eta=0.2",,,-0.010,-0.008
+rca_weight,"gamma=0.9, eta=0.1",,,-0.023,-0.018
+rca_weight,"gamma=1.0, eta=0.0",,,-0.048,-0.031
+contamination,0%,0.004,0.004,0.004,
+contamination,1%,0.002,0.002,0.002,
+contamination,3% reference,0.000,0.000,0.000,
+contamination,5%,-0.007,-0.006,-0.008,
+contamination,10%,-0.024,-0.018,-0.025,
+contamination,15%,-0.049,-0.037,-0.050,

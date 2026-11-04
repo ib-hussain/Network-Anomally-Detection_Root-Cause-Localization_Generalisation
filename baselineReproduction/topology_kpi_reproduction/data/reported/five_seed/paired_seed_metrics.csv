@@ -1,0 +1,11 @@
+comparison,seed,proposed,baseline,difference
+F1: Proposed vs DCdetector,17,0.9202,0.9227,-0.0025
+F1: Proposed vs DCdetector,29,0.9273,0.9126,0.0147
+F1: Proposed vs DCdetector,43,0.9193,0.9171,0.0022
+F1: Proposed vs DCdetector,71,0.9235,0.9236,-0.0001
+F1: Proposed vs DCdetector,101,0.9271,0.9200,0.0071
+A@1: Proposed vs Nezha restricted,17,0.7611,0.7444,0.0167
+A@1: Proposed vs Nezha restricted,29,0.7367,0.6878,0.0489
+A@1: Proposed vs Nezha restricted,43,0.7767,0.6989,0.0778
+A@1: Proposed vs Nezha restricted,71,0.7756,0.7111,0.0645
+A@1: Proposed vs Nezha restricted,101,0.7567,0.6911,0.0656

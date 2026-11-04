@@ -1,0 +1,27 @@
+{
+  "shared": {"window": 20, "stride": 1, "split": [0.60, 0.15, 0.25], "seeds": 5, "optimizer": "adam", "lr": 0.001, "batch": 64, "epochs": 50, "patience": 8, "clip": 5.0},
+  "detection": {
+    "OLS": {"lag": 1, "intercept": true, "score": "max_normalized_absolute_residual", "implementation": "native_numpy"},
+    "VAR(1)": {"lag": 1, "intercept": true, "score": "max_normalized_absolute_residual", "implementation": "native_numpy"},
+    "OmniAnomaly": {"gru_hidden": 64, "latent": 16, "mc_samples": 10, "implementation": "clean_room_compatibility; official adapter required for strict reproduction"},
+    "MSCRED": {"signature_windows": [5, 10, 20], "channels": [32, 64, 128], "implementation": "clean_room_compatibility; short-window adaptation"},
+    "USAD": {"encoder": [64, 32, 16], "decoder_count": 2, "implementation": "clean_room_compatibility; official adapter required for strict reproduction"},
+    "THOC": {"hidden": 64, "resolutions": 3, "clusters": 6, "implementation": "clean_room_compatibility; official adapter required for strict reproduction"},
+    "MTAD-GAT": {"heads": 4, "gru_hidden": 64, "score_weights": [0.5, 0.5], "implementation": "clean_room_compatibility; official adapter required for strict reproduction"},
+    "GDN": {"embedding": 64, "graph_layers": 1, "top_k_rule": "min(10,D-1)", "implementation": "clean_room_compatibility; dense small-D adaptation"},
+    "InterFusion": {"metric_latent": 16, "temporal_latent": 16, "hidden": 64, "mc_samples": 10, "implementation": "clean_room_compatibility; official adapter required for strict reproduction"},
+    "Anomaly Transformer": {"layers": 3, "d_model": 64, "heads": 4, "d_ff": 256, "dropout": 0.1, "implementation": "clean_room_compatibility; official adapter required for strict minimax training"},
+    "TranAD": {"layers": 2, "d_model": 64, "heads": 4, "d_ff": 256, "dropout": 0.1, "implementation": "clean_room_compatibility; self-conditioned two-phase training"},
+    "DCdetector": {"layers": 3, "d_model": 64, "heads": 4, "patches": [1, 5], "dropout": 0.1, "implementation": "clean_room_compatibility; short-window dual-attention adaptation"}
+  },
+  "rca": {
+    "OLS-residual": {"implementation": "native_numpy"},
+    "VAR(1)-residual": {"implementation": "native_numpy"},
+    "CauseInfer": {"max_lag": 3, "alpha": 0.05, "implementation": "compact_input_matched"},
+    "MonitorRank": {"damping": 0.85, "tolerance": 1e-6, "iterations": 100, "implementation": "native_graph_rule"},
+    "CloudRanger": {"max_lag": 3, "alpha": 0.05, "restart": 0.15, "tolerance": 1e-6, "iterations": 100, "implementation": "compact_input_matched"},
+    "MicroCause": {"max_lag": 3, "alpha": 0.05, "implementation": "compact_input_matched"},
+    "TraceRCA-inspired restricted adaptation": {"max_lag": 3, "restart": 0.15, "iterations": 100, "implementation": "compact_restricted"},
+    "Nezha-inspired restricted adaptation": {"hidden": 64, "layers": 2, "heads": 4, "dropout": 0.1, "implementation": "supervised restricted-input KPI/topology adaptation; native multimodal inputs unavailable"}
+  }
+}

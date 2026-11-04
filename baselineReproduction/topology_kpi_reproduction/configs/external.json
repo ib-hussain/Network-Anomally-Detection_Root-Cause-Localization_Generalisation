@@ -1,0 +1,40 @@
+{
+  "data": {
+    "window_length": 20,
+    "stride": 1,
+    "split": [0.40, 0.20, 0.40]
+  },
+  "model": {
+    "hidden_dim": 64,
+    "temporal_layers": 2,
+    "graph_layers": 2,
+    "attention_heads": 4,
+    "feedforward_dim": 256,
+    "dropout": 0.1,
+    "topology_input_strength": 0.2,
+    "mask_ratio": 0.15,
+    "prediction_horizon": 1,
+    "lambda_rec": 1.0,
+    "lambda_pred": 1.0,
+    "lambda_topology": 0.10,
+    "alpha": 0.50,
+    "top_m": 3
+  },
+  "rca": {
+    "node_threshold_quantile": 0.99,
+    "candidate_cap": 5,
+    "propagation_depth": 3,
+    "decay": 0.70,
+    "gamma": 0.60,
+    "eta": 0.40
+  },
+  "training": {
+    "optimizer": "adam",
+    "learning_rate": 0.001,
+    "batch_size": 64,
+    "max_epochs": 50,
+    "patience": 8,
+    "gradient_clip": 5.0,
+    "seeds": [17, 29, 43, 71, 101]
+  }
+}

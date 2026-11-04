@@ -1,0 +1,54 @@
+{
+  "data": {
+    "kpi_names": ["cpu", "memory", "inbound_traffic", "outbound_traffic", "rtt", "packet_loss", "queue_length", "interface_errors"],
+    "topology_sizes": [12, 24, 48],
+    "sampling_seconds": 30,
+    "window_length": 20,
+    "stride": 1,
+    "split": [0.60, 0.15, 0.25],
+    "train_contamination": 0.03,
+    "fault_types": ["cpu_overload", "bandwidth_bottleneck", "packet_loss", "link_delay", "interface_failure", "routing_instability"]
+  },
+  "model": {
+    "hidden_dim": 64,
+    "temporal_layers": 2,
+    "graph_layers": 2,
+    "attention_heads": 4,
+    "feedforward_dim": 256,
+    "dropout": 0.1,
+    "topology_input_strength": 0.2,
+    "mask_ratio": 0.15,
+    "prediction_horizon": 1,
+    "lambda_rec": 1.0,
+    "lambda_pred": 1.0,
+    "lambda_topology": 0.10,
+    "alpha": 0.50,
+    "top_m": 3
+  },
+  "rca": {
+    "node_threshold_quantile": 0.99,
+    "candidate_cap": 5,
+    "propagation_depth": 3,
+    "decay": 0.70,
+    "gamma": 0.60,
+    "eta": 0.40
+  },
+  "training": {
+    "optimizer": "adam",
+    "learning_rate": 0.001,
+    "batch_size": 64,
+    "max_epochs": 50,
+    "patience": 8,
+    "gradient_clip": 5.0,
+    "seeds": [17, 29, 43, 71, 101]
+  },
+  "selection_grids": {
+    "lambda_topology": [0.0, 0.01, 0.05, 0.10, 0.20, 0.50],
+    "window_length": [10, 20, 30],
+    "mask_ratio": [0.10, 0.15, 0.20],
+    "propagation_depth": [2, 3, 4],
+    "decay": [0.3, 0.5, 0.7, 0.9],
+    "gamma": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+  }
+}
+
