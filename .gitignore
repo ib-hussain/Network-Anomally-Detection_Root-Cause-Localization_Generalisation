@@ -1,3 +1,17 @@
 *.zip
 *.docx
 baselineReproduction/On_Graph_Design_for_GNN-Based_Network_Anomaly_Detection/5G3E-dataset/
+
+# Local per-baseline environments, data fixtures, models, caches, and run outputs
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.ipynb_checkpoints/
+**/smoke_data/
+**/runs/
+**/pretrained/
+**/logs_train/
+**/logs_predict/
+**/.pyenv/
+**/.dependencies-export.txt
+hardware-info.txt

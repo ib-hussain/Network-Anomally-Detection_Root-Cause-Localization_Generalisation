@@ -1,5 +1,15 @@
-gpu_n=$1
-DATASET=$2
+set -euo pipefail
+HERE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cd "$HERE"
+if [[ $# -ne 2 ]]; then
+    echo 'Usage: bash run.sh cpu msl   OR   bash run.sh 0 msl' >&2
+    exit 2
+fi
+gpu_n="$1"
+DATASET="$2"
+if [[ ! -e "data/${DATASET}/train.csv" || ! -e "data/${DATASET}/test.csv" ]]; then
+    echo "Missing data/${DATASET}/train.csv or test.csv" >&2; exit 2
+fi
 
 seed=5
 BATCH_SIZE=32
@@ -33,7 +43,6 @@ if [[ "$gpu_n" == "cpu" ]]; then
         -dim $dim \
         -out_layer_num $out_layer_num \
         -out_layer_inter_dim $out_layer_inter_dim \
-        -decay $decay \
         -val_ratio $val_ratio \
         -report $report \
         -topk $topk \
@@ -52,7 +61,6 @@ else
         -dim $dim \
         -out_layer_num $out_layer_num \
         -out_layer_inter_dim $out_layer_inter_dim \
-        -decay $decay \
         -val_ratio $val_ratio \
         -report $report \
         -topk $topk

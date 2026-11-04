@@ -11,7 +11,7 @@ class Paths:
 
 @dataclass
 class SWATPaths(Paths):
-    base_path: str = "/home/killian/Documents/Data/Swat"
+    base_path: str = "datasets_files/swat"
     name_train: str = "SWaT_data_train.csv"
     name_val: str = "SWaT_data_val.csv"
     name_test: str = "SWaT_data_test.csv"
@@ -24,11 +24,11 @@ class TELCOPaths(Paths):
 
 @dataclass
 class CISCOPaths(Paths):
-    base_path: str = "/home/killian/Documents/Data/cisco"
+    base_path: str = "datasets_files/cisco"
     name_train: str = "preprocessed_final_short_cisco_train.csv"
     name_val: str = "preprocessed_new_short_cisco_val.csv"
     name_test: str = "preprocessed_final_short_cisco_test.csv"
-    edge_index_path: str = "/final/cosi5_l4_th6_25_short.csv"
+    edge_index_path: str = "datasets_files/cisco/cosi_adjacency.csv"
 
 
 @dataclass

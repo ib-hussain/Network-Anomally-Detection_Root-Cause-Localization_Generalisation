@@ -142,27 +142,11 @@ class GDN(nn.Module):
             
             all_embeddings = self.embedding(torch.arange(node_num).to(device))
 
-            weights_arr = all_embeddings.detach().clone()
-            all_embeddings = all_embeddings.repeat(batch_num, 1)
+            # COSI's variation of GDN uses the supplied graph edges, not GDN's
+            # learned top-K adjacency. Do not compute an unused learned graph.
+            # This also allows supplied graphs with fewer than topk nodes.
+            self.learned_graph = None
 
-            weights = weights_arr.view(node_num, -1)
-
-            cos_ji_mat = torch.matmul(weights, weights.T)
-            normed_mat = torch.matmul(weights.norm(dim=-1).view(-1,1), weights.norm(dim=-1).view(1,-1))
-            cos_ji_mat = cos_ji_mat / normed_mat
-
-            dim = weights.shape[-1]
-            topk_num = self.topk
-
-            topk_indices_ji = torch.topk(cos_ji_mat, topk_num, dim=-1)[1]
-
-            self.learned_graph = topk_indices_ji
-
-            gated_i = torch.arange(0, node_num).T.unsqueeze(1).repeat(1, topk_num).flatten().to(device).unsqueeze(0)
-            gated_j = topk_indices_ji.flatten().unsqueeze(0)
-            gated_edge_index = torch.cat((gated_j, gated_i), dim=0)
-
-            batch_gated_edge_index = get_batch_edge_index(gated_edge_index, batch_num, node_num).to(device)
             gcn_out = self.gnn_layers[i](x, batch_edge_index, node_num=node_num*batch_num, embedding=all_embeddings)
             
             gcn_outs.append(gcn_out)

@@ -127,7 +127,7 @@ calculate_metrics(
 )
 
 
- %%
+# %%
 calculate_metrics(
     synthetic_data,
     prediction_5,

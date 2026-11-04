@@ -7,9 +7,6 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.loggers import TensorBoardLogger
 from torch import nn
 from torch.nn import Module
-import sys
-sys.path.append('/home/killian/Documents/python_project/GraGOD/')
-#print(sys.path)
 from datasets.config import get_dataset_config
 from datasets.dataset import get_data_loader
 from datasets.graph import get_edge_index
@@ -266,4 +263,6 @@ if __name__ == "__main__":
     if args.params_file is None:
         args.params_file = f"models/{args.model.value}/params.yaml"
 
+    if args.dataset in (Datasets.CISCO, Datasets.SWAT) and not args.edge_path:
+        parser.error('--edge_path is required for COSI graph comparison; missing it would silently select a fully connected graph')
     main(args.model, args.dataset, args.params_file, args.edge_path)

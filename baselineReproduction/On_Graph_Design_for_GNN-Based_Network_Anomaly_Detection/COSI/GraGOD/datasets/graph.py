@@ -1,6 +1,7 @@
 import networkx as nx
 import torch
 import numpy as np
+from pathlib import Path
 
 
 ### not sure if i should modify fil edges to fit with the removeing of 'time' after incorporating the edges (-1 for all edges)
@@ -39,34 +40,35 @@ def get_edge_index(
         The edge index of the graph.
     """
     if path:
+        if not Path(path).is_file():
+            raise FileNotFoundError(f'Specified COSI graph not found: {path}. Refusing fully connected fallback.')
         if path.endswith('.csv'):
 
             adj_25=np.genfromtxt(path, delimiter=',')
+            if adj_25.ndim != 2 or adj_25.shape[0] != adj_25.shape[1] or not np.isfinite(adj_25).all():
+                raise ValueError(f'Graph {path} must be a headerless finite square CSV')
+            if X is not None and adj_25.shape[0] != X.shape[1]:
+                raise ValueError(f'Graph {path} has {adj_25.shape[0]} features but data has {X.shape[1]}')
             edges_index=fil_edges(adj_25)
-            fc_edge_index = torch.tensor(edges_index, dtype = torch.long)
+            fc_edge_index = torch.as_tensor(edges_index, dtype=torch.long)
+            if fc_edge_index.shape[1] == 0:
+                raise ValueError(f'Graph {path} contains no positive upper-triangle edges')
             #torch.save(fc_edge_index,"adj.pt")
             print(f"Load edge index from matrix adjacency from path: {path}")
             return fc_edge_index.to(device)
 
-        else:    
-            try:
-                edge_index = torch.load(path)
-                if not isinstance(edge_index, torch.Tensor):
-                    edge_index = torch.tensor(edge_index, dtype=torch.long)
-                else:
-                    edge_index = edge_index.long()
-
-                if edge_index.dim() != 2 or edge_index.size(0) != 2:
-                    raise ValueError(
-                        f"Edge index must have shape [2, num_edges], got {edge_index.shape}"
-                    )
-
-                print(f"Loaded edge index from {path}")
-                return edge_index.to(device)
-            except FileNotFoundError:
-                print(f"Edge index file not found at {path}")
-            except Exception as e:
-                print(f"Error loading edge index: {str(e)}")
+        else:
+            edge_index = torch.load(path, map_location='cpu', weights_only=True)
+            if not isinstance(edge_index, torch.Tensor):
+                edge_index = torch.as_tensor(edge_index, dtype=torch.long)
+            else:
+                edge_index = edge_index.long()
+            if edge_index.ndim != 2 or edge_index.shape[0] != 2:
+                raise ValueError(f'Graph tensor must have shape [2, E], got {edge_index.shape}')
+            if X is not None and edge_index.numel() > 0 and edge_index.max().item() >= X.shape[1]:
+                raise ValueError('Graph tensor contains feature index outside data columns')
+            print(f'Loaded edge index from {path}')
+            return edge_index.to(device)
 
     if X is None:
         raise ValueError("X must be provided if path is non-existent")

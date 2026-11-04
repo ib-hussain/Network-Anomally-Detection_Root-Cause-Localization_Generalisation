@@ -6,7 +6,10 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-DATASET=$1
+set -euo pipefail
+HERE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cd "$HERE"
+DATASET="$1"
 
 # Validate dataset choice
 if [[ "$DATASET" != "telco" && "$DATASET" != "swat" && "$DATASET" != "ute" ]]; then
